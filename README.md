@@ -52,8 +52,8 @@ systemctl status mariadb
 
 mysql
 
-create database cacti;
-GRANT ALL ON cactidb.* TO cactiuser@localhost IDENTIFIED BY 'cactiuser';
+create database cactidb;
+GRANT ALL ON cactidb.* TO cactiuser@localhost IDENTIFIED BY 'passwordkamu';
 flush privileges;
 exit;
 
@@ -64,6 +64,16 @@ MariaDB [(none)]> GRANT SELECT ON mysql.time_zone_name TO cactiuser@localhost;
 MariaDB [(none)]> flush privileges;
 MariaDB [(none)]> exit;
 
-
+rm -rf /var/www/html/index.html
 wget https://www.cacti.net/downloads/cacti-latest.tar.gz --no-check-certificate
 
+mv cacti-1* /var/www/html/cacti
+
+nano /var/www/html/include/config.php
+
+$database_default  = 'cactidb';
+$database_hostname = 'localhost';
+$database_username = 'passwordkamu';
+$database_password = 'passwordkamu';
+
+chown -R www-data:www-data /var/www/html/*
