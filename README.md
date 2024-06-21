@@ -37,7 +37,7 @@ tmp_table_size = 64M
 join_buffer_size = 1M
 innodb_file_format = Barracuda
 innodb_large_prefix = 1
-innodb_buffer_pool_size = 512M
+innodb_buffer_pool_size = 1024M
 innodb_flush_log_at_timeout = 3
 innodb_read_io_threads = 32
 innodb_write_io_threads = 16
@@ -88,5 +88,6 @@ $database_username = 'passwordkamu';
 $database_password = 'passwordkamu';
 
 chown -R www-data:www-data /var/www/html/*
+chmod -R 775 /var/www/html
 
-mysql cactidb < /var/www/html/cacti/cacti.sql
+mysql cactidb < /var/www/html/cacti.sql
