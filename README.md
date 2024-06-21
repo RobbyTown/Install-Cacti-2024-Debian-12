@@ -52,7 +52,7 @@ systemctl status mariadb
 
 mysql
 
-create database cactidb;
+create database cacti;
 GRANT ALL ON cactidb.* TO cactiuser@localhost IDENTIFIED BY 'cactiuser';
 flush privileges;
 exit;
