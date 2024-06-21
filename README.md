@@ -60,16 +60,27 @@ exit;
 mysql mysql < /usr/share/mysql/mysql_test_data_timezone.sql
 
 mysql
-MariaDB [(none)]> GRANT SELECT ON mysql.time_zone_name TO cactiuser@localhost;
+mysql -uroot -e GRANT SELECT ON mysql.time_zone_name TO cactiuser@localhost;
 MariaDB [(none)]> flush privileges;
 MariaDB [(none)]> exit;
 
+mysqladmin -uroot -p create cacti
+
+mysql -uroot -p -e "grant all on cacti.* to 'someuser'@'localhost' identified by 'somepassword'"
+
+mysql -uroot -p -e "grant select on mysql.time_zone_name to 'someuser'@'localhost' identified by 'somepassword'"
+
+mysql -uroot -p cacti < /pathcacti/cacti.sql
+
 rm -rf /var/www/html/index.html
+
 wget https://www.cacti.net/downloads/cacti-latest.tar.gz --no-check-certificate
 
-mv cacti-1* /var/www/html/cacti
+tar -zxvf cacti-latest.tar.gz
 
-nano /var/www/html/cacti/include/config.php
+cp -a cacti-1*/. /var/www/html
+
+nano /var/www/html/include/config.php
 
 $database_default  = 'cactidb';
 $database_hostname = 'localhost';
@@ -77,3 +88,5 @@ $database_username = 'passwordkamu';
 $database_password = 'passwordkamu';
 
 chown -R www-data:www-data /var/www/html/*
+
+mysql cactidb < /var/www/html/cacti/cacti.sql
