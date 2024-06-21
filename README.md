@@ -69,7 +69,7 @@ wget https://www.cacti.net/downloads/cacti-latest.tar.gz --no-check-certificate
 
 mv cacti-1* /var/www/html/cacti
 
-nano /var/www/html/include/config.php
+nano /var/www/html/cacti/include/config.php
 
 $database_default  = 'cactidb';
 $database_hostname = 'localhost';
