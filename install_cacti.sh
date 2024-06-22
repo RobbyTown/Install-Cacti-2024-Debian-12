@@ -3,26 +3,31 @@
 echo "----------------------------------------------------"
 echo " START INSTALL CACTI TERBARU DEBIAN 12 "
 echo "----------------------------------------------------"
+sleep 2
 echo ""
 echo "----------------------------------------------------"
 echo " update dan upgrade "
 echo "----------------------------------------------------"
 apt update && apt upgrade -y
 
+sleep 2
 echo "----------------------------------------------------"
 echo "Install Paket pendukung Cacti"
 echo "----------------------------------------------------"
 apt install snmp php-snmp rrdtool librrds-perl unzip curl git gnupg2 -y
 
+sleep 2
 echo "----------------------------------------------------"
 echo "Install LAMP Server"
 echo "----------------------------------------------------"
 apt install apache2 mariadb-server php php-mysql libapache2-mod-php php-xml php-ldap php-mbstring php-gd php-gmp php-intl -y
 
+sleep 2
 echo "----------------------------------------------------"
 echo "Config Apache"
 echo "----------------------------------------------------"
 
+sleep 2
 sed -i 's/memory_limit = 128M/memory_limit = 1024M/g' /etc/php/8.2/apache2/php.ini
 
 sed -i 's/max_execution_time = 30/max_execution_time = 60/g' /etc/php/8.2/apache2/php.ini
@@ -41,6 +46,7 @@ echo "----------------------------------------------------"
 echo "Config MySQL"
 echo "----------------------------------------------------"
 
+sleep 2
 sed -i 's/collation-server      = utf8mb4_general_ci/collation-server      = utf8mb4_unicode_ci/g' /etc/mysql/mariadb.conf.d/50-server.cnf
 
 cat >> /etc/mysql/mariadb.conf.d/50-server.cnf << EOF
@@ -64,6 +70,8 @@ systemctl restart mariadb
 echo "----------------------------------------------------"
 echo "  Nama Database  "
 echo "----------------------------------------------------"
+sleep 2
+
 read -p "contoh cactidb: " namadb
 
 mysqladmin -uroot create $namadb
@@ -71,6 +79,8 @@ mysqladmin -uroot create $namadb
 echo "----------------------------------------------------"
 echo "  Password Database  "
 echo "----------------------------------------------------"
+sleep 2
+
 read -p "masukkan password untuk database: " passdb
 
 mysql -uroot -e "grant all on cacti.* to 'cactiuser'@'localhost' identified by '$passdb'"
@@ -88,16 +98,22 @@ rm -rf /var/www/html/index.html
 echo "----------------------------------------------------"
 echo " download cacti versi terbaru "
 echo "----------------------------------------------------"
+sleep 2
+
 wget https://www.cacti.net/downloads/cacti-latest.tar.gz --no-check-certificate
 
 echo "----------------------------------------------------"
 echo " Ekstrak Cacti "
 echo "----------------------------------------------------"
+sleep 2
+
 tar -zxvf cacti-latest.tar.gz
 
 echo "----------------------------------------------------"
 echo " Copy Cacti ke Folder /var/www/html"
 echo "----------------------------------------------------"
+sleep 2
+
 cp -a cacti-1*/. /var/www/html
 
 chown -R www-data:www-data /var/www/html/*
@@ -108,7 +124,7 @@ mysql cactidb < /var/www/html/cacti.sql
 
 sed -i 's/database_default  = '\''cacti/database_default  = '\'''$namadb'/g' /var/www/html/include/config.php
 
-sed -i 's/database_password  = '\''cactiuser/database_password  = '\'''$passdb'/g' /var/www/html/include/config.php
+sed -i 's/database_password = '\''cactiuser/database_password = '\'''$passdb'/g' /var/www/html/include/config.php
 
 
 echo "===================================================="
