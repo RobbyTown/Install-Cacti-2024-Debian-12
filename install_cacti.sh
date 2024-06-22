@@ -134,7 +134,7 @@ echo "----------------------------------------------------"
 sleep 2
 touch /etc/cron.d/cacti
 cat >> /etc/cron.d/cacti << EOF
-*/5 * * * * www-data php /var/www/html/cacti/poller.php > /dev/null 2>&1
+*/5 * * * * www-data php /var/www/html/poller.php > /dev/null 2>&1
 EOF
 
 echo "===================================================="
