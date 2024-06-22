@@ -131,6 +131,6 @@ sed -i 's/url_path = '\''\/cacti/url_path = '\''/g' /var/www/html/include/config
 echo "===================================================="
 echo " *** FINISH *** "
 echo " cacti terinstall di folder /var/www/html "
-echo " silahkan lanjutkan login cacti http://ipanda "
+echo " silahkan lanjutkan login cacti http://"`hostname -I | awk '{print $1}'`
 echo " username: admin password: admin "
 echo "===================================================="
