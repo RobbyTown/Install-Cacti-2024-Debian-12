@@ -1,4 +1,5 @@
 #!/bin/sh
+
 echo "----------------------------------------------------"
 echo " START INSTALL CACTI TERBARU DEBIAN 12 "
 echo "----------------------------------------------------"
@@ -37,7 +38,7 @@ sed -i 's/;date.timezone =/date.timezone = Asia\/Jakarta/g' /etc/php/8.2/cli/php
 systemctl restart apache2
 
 echo "----------------------------------------------------"
-echo "Config Apache"
+echo "Config MySQL"
 echo "----------------------------------------------------"
 
 sed -i 's/collation-server      = utf8mb4_general_ci/collation-server      = utf8mb4_unicode_ci/g' /etc/mysql/mariadb.conf.d/50-server.cnf
