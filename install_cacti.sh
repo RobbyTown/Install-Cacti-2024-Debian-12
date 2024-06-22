@@ -128,6 +128,15 @@ sed -i 's/database_password = '\''cactiuser/database_password = '\'''$passdb'/g'
 
 sed -i 's/url_path = '\''\/cacti/url_path = '\''/g' /var/www/html/include/config.php
 
+echo "----------------------------------------------------"
+echo " Tambah cacti di cronjob"
+echo "----------------------------------------------------"
+sleep 2
+touch /etc/cron.d/cacti
+cat >> /etc/cron.d/cacti << EOF
+*/5 * * * * www-data php /var/www/html/cacti/poller.php > /dev/null 2>&1
+EOF
+
 echo "===================================================="
 echo " *** FINISH *** "
 echo " cacti terinstall di folder /var/www/html "
