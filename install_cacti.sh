@@ -120,7 +120,7 @@ chown -R www-data:www-data /var/www/html/*
 
 chmod -R 775 /var/www/html
 
-mysql cactidb < /var/www/html/cacti.sql
+mysql $namadb < /var/www/html/cacti.sql
 
 sed -i 's/database_default  = '\''cacti/database_default  = '\'''$namadb'/g' /var/www/html/include/config.php
 
