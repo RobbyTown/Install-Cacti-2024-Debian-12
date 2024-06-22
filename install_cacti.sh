@@ -83,7 +83,7 @@ sleep 2
 
 read -p "masukkan password untuk database: " passdb
 
-mysql -uroot -e "grant all on cacti.* to 'cactiuser'@'localhost' identified by '$passdb'"
+mysql -uroot -e "grant all on $namadb.* to 'cactiuser'@'localhost' identified by '$passdb'"
 
 mysql -uroot -e "flush privileges"
 
@@ -126,6 +126,7 @@ sed -i 's/database_default  = '\''cacti/database_default  = '\'''$namadb'/g' /va
 
 sed -i 's/database_password = '\''cactiuser/database_password = '\'''$passdb'/g' /var/www/html/include/config.php
 
+sed -i 's/url_path = '\''\/cacti/url_path = '\''/g' /var/www/html/include/config.php
 
 echo "===================================================="
 echo " *** FINISH *** "
