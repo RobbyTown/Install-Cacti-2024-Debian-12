@@ -1,5 +1,6 @@
 #!/bin/sh
 
+sudo timedatectl set-timezone Asia/Jakarta
 echo "----------------------------------------------------"
 echo " START INSTALL CACTI TERBARU DEBIAN 12 "
 echo "----------------------------------------------------"
