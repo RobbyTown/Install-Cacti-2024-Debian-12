@@ -137,6 +137,7 @@ cat >> /etc/cron.d/cacti << EOF
 */5 * * * * www-data php /var/www/html/poller.php > /dev/null 2>&1
 EOF
 
+chmod +x /etc/cron.d/cacti
 echo "===================================================="
 echo " *** FINISH *** "
 echo " cacti terinstall di folder /var/www/html "
