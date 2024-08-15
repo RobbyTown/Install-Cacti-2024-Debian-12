@@ -117,9 +117,9 @@ sleep 2
 
 cp -a cacti-1*/. /var/www/html
 
-chown -R www-data:www-data /var/www/html/*
+chown -R www-data:www-data /var/www/html/
 
-chmod -R 775 /var/www/html
+chmod -R 775 /var/www/html/
 
 mysql $namadb < /var/www/html/cacti.sql
 
