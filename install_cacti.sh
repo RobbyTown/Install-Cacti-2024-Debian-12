@@ -15,7 +15,7 @@ sleep 2
 echo "----------------------------------------------------"
 echo "Install Paket pendukung Cacti"
 echo "----------------------------------------------------"
-apt install snmp php-snmp rrdtool librrds-perl unzip curl git gnupg2 -y
+apt install cron snmp php-snmp rrdtool librrds-perl unzip curl git gnupg2 -y
 
 sleep 2
 echo "----------------------------------------------------"
