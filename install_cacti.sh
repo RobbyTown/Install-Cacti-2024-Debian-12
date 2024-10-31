@@ -52,7 +52,7 @@ sed -i 's/collation-server      = utf8mb4_general_ci/collation-server      = utf
 
 cat >> /etc/mysql/mariadb.conf.d/50-server.cnf << EOF
 max_heap_table_size = 128M
-tmp_table_size = 64M
+tmp_table_size = 128M
 join_buffer_size = 1M
 innodb_file_format = Barracuda
 innodb_large_prefix = 1
@@ -122,6 +122,8 @@ chown -R www-data:www-data /var/www/html/
 chmod -R 775 /var/www/html/
 
 mysql $namadb < /var/www/html/cacti.sql
+
+cp /var/www/html/include/config.php.dist /var/www/html/include/config.php
 
 sed -i 's/database_default  = '\''cacti/database_default  = '\'''$namadb'/g' /var/www/html/include/config.php
 
