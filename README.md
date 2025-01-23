@@ -1,5 +1,3 @@
-# Dutch timezone
-
 # Install Cacti 2024 Debian 12
 
 ```
@@ -11,3 +9,6 @@ chmod +x install_cacti.sh
 ```
 sh install_cacti.sh
 ```
+
+# About install_cacti.sh
+Translated to English and timezone set to Europe/Amsterdam
