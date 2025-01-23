@@ -69,11 +69,11 @@ EOF
 systemctl restart mariadb
 
 echo "----------------------------------------------------"
-echo "  Database Name  "
+echo "  Create Database Name  "
 echo "----------------------------------------------------"
 sleep 2
 
-read -p "example of cactidb: " cactiprd
+read -p "Attention typed together and only letters, no minus sign " cactiprd
 
 mysqladmin -uroot create $namadb
 
