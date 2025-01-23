@@ -73,9 +73,9 @@ echo "  Create Database Name  "
 echo "----------------------------------------------------"
 sleep 2
 
-read -p "Attention typed together and only letters, no minus sign " cactiprd
+read -p "Attention typed together and only letters, no minus sign " mentionedb
 
-mysqladmin -uroot create $namadb
+mysqladmin -uroot create $mentionedb
 
 echo "----------------------------------------------------"
 echo "  Password Database  "
@@ -84,7 +84,7 @@ sleep 2
 
 read -p "Enter the password for the database: " passdb
 
-mysql -uroot -e "grant all on $namadb.* to 'cactiuser'@'localhost' identified by '$passdb'"
+mysql -uroot -e "grant all on $mentionedb.* to 'cactiuser'@'localhost' identified by '$passdb'"
 
 mysql -uroot -e "flush privileges"
 
@@ -121,11 +121,11 @@ chown -R www-data:www-data /var/www/html/
 
 chmod -R 775 /var/www/html/
 
-mysql $namadb < /var/www/html/cacti.sql
+mysql $mentionedb < /var/www/html/cacti.sql
 
 cp /var/www/html/include/config.php.dist /var/www/html/include/config.php
 
-sed -i 's/database_default  = '\''cacti/database_default  = '\'''$namadb'/g' /var/www/html/include/config.php
+sed -i 's/database_default  = '\''cacti/database_default  = '\'''$mentionedb'/g' /var/www/html/include/config.php
 
 sed -i 's/database_password = '\''cactiuser/database_password = '\'''$passdb'/g' /var/www/html/include/config.php
 
