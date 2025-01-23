@@ -73,7 +73,7 @@ echo "  Create Database Name  "
 echo "----------------------------------------------------"
 sleep 2
 
-read -p "Attention typed together and only letters, no minus sign " mentionedb
+read -p "Attention typed together and only letters, no minus sign: " mentionedb
 
 mysqladmin -uroot create $mentionedb
 
