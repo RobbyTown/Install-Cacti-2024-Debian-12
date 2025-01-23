@@ -13,19 +13,19 @@ apt update && apt upgrade -y
 
 sleep 2
 echo "----------------------------------------------------"
-echo " Install Paket pendukung Cacti"
+echo " Install Cacti support package "
 echo "----------------------------------------------------"
 apt install cron snmp php-snmp rrdtool librrds-perl unzip curl git gnupg2 -y
 
 sleep 2
 echo "----------------------------------------------------"
-echo " Install LAMP Server"
+echo " Install LAMP Server "
 echo "----------------------------------------------------"
 apt install apache2 mariadb-server php php-mysql libapache2-mod-php php-xml php-ldap php-mbstring php-gd php-gmp php-intl -y
 
 sleep 2
 echo "----------------------------------------------------"
-echo " Config Apache"
+echo " Config Apache "
 echo "----------------------------------------------------"
 
 sleep 2
@@ -44,7 +44,7 @@ sed -i 's/;date.timezone =/date.timezone = Europe\/Amsterdam/g' /etc/php/8.2/cli
 systemctl restart apache2
 
 echo "----------------------------------------------------"
-echo " Config MySQL"
+echo " Config MySQL "
 echo "----------------------------------------------------"
 
 sleep 2
@@ -69,7 +69,7 @@ EOF
 systemctl restart mariadb
 
 echo "----------------------------------------------------"
-echo "  Create Database Name  "
+echo " Create Database Name "
 echo "----------------------------------------------------"
 sleep 2
 
@@ -78,7 +78,7 @@ read -p "Attention typed together and only letters, no minus sign: " mentionedb
 mysqladmin -uroot create $mentionedb
 
 echo "----------------------------------------------------"
-echo "  Password Database  "
+echo " Password Database "
 echo "----------------------------------------------------"
 sleep 2
 
@@ -104,14 +104,14 @@ sleep 2
 wget https://www.cacti.net/downloads/cacti-latest.tar.gz --no-check-certificate
 
 echo "----------------------------------------------------"
-echo " Extract Cacti"
+echo " Extract Cacti "
 echo "----------------------------------------------------"
 sleep 2
 
 tar -zxvf cacti-latest.tar.gz
 
 echo "----------------------------------------------------"
-echo " Copy cacti to folder /var/www/html"
+echo " Copy cacti to folder /var/www/html "
 echo "----------------------------------------------------"
 sleep 2
 
@@ -132,7 +132,7 @@ sed -i 's/database_password = '\''cactiuser/database_password = '\'''$passdb'/g'
 sed -i 's/url_path = '\''\/cacti/url_path = '\''/g' /var/www/html/include/config.php
 
 echo "----------------------------------------------------"
-echo " Add cacti in cronjob"
+echo " Add cacti in cronjob "
 echo "----------------------------------------------------"
 sleep 2
 touch /etc/cron.d/cacti
