@@ -1,31 +1,31 @@
 #!/bin/sh
 
-sudo timedatectl set-timezone Asia/Jakarta
+sudo timedatectl set-timezone Europe/Amsterdam
 echo "----------------------------------------------------"
-echo " START INSTALL CACTI TERBARU DEBIAN 12 "
+echo " START INSTALLING THE LATEST CACTI DEBIAN 12 "
 echo "----------------------------------------------------"
 sleep 2
 echo ""
 echo "----------------------------------------------------"
-echo " update dan upgrade "
+echo " updates and upgrades "
 echo "----------------------------------------------------"
 apt update && apt upgrade -y
 
 sleep 2
 echo "----------------------------------------------------"
-echo "Install Paket pendukung Cacti"
+echo " Install Paket pendukung Cacti"
 echo "----------------------------------------------------"
 apt install cron snmp php-snmp rrdtool librrds-perl unzip curl git gnupg2 -y
 
 sleep 2
 echo "----------------------------------------------------"
-echo "Install LAMP Server"
+echo " Install LAMP Server"
 echo "----------------------------------------------------"
 apt install apache2 mariadb-server php php-mysql libapache2-mod-php php-xml php-ldap php-mbstring php-gd php-gmp php-intl -y
 
 sleep 2
 echo "----------------------------------------------------"
-echo "Config Apache"
+echo " Config Apache"
 echo "----------------------------------------------------"
 
 sleep 2
@@ -33,18 +33,18 @@ sed -i 's/memory_limit = 128M/memory_limit = 1024M/g' /etc/php/8.2/apache2/php.i
 
 sed -i 's/max_execution_time = 30/max_execution_time = 60/g' /etc/php/8.2/apache2/php.ini
 
-sed -i 's/;date.timezone =/date.timezone = Asia\/Jakarta/g' /etc/php/8.2/apache2/php.ini
+sed -i 's/;date.timezone =/date.timezone = Europe\/Amsterdam/g' /etc/php/8.2/apache2/php.ini
 
 sed -i 's/memory_limit = 128M/memory_limit = 1024M/g' /etc/php/8.2/cli/php.ini
 
 sed -i 's/max_execution_time = 30/max_execution_time = 60/g' /etc/php/8.2/cli/php.ini
 
-sed -i 's/;date.timezone =/date.timezone = Asia\/Jakarta/g' /etc/php/8.2/cli/php.ini
+sed -i 's/;date.timezone =/date.timezone = Europe\/Amsterdam/g' /etc/php/8.2/cli/php.ini
 
 systemctl restart apache2
 
 echo "----------------------------------------------------"
-echo "Config MySQL"
+echo " Config MySQL"
 echo "----------------------------------------------------"
 
 sleep 2
@@ -69,11 +69,11 @@ EOF
 systemctl restart mariadb
 
 echo "----------------------------------------------------"
-echo "  Nama Database  "
+echo "  Database Name  "
 echo "----------------------------------------------------"
 sleep 2
 
-read -p "contoh cactidb: " namadb
+read -p "example of cactidb: " cactiprd
 
 mysqladmin -uroot create $namadb
 
@@ -82,7 +82,7 @@ echo "  Password Database  "
 echo "----------------------------------------------------"
 sleep 2
 
-read -p "masukkan password untuk database: " passdb
+read -p "Enter the password for the database: " passdb
 
 mysql -uroot -e "grant all on $namadb.* to 'cactiuser'@'localhost' identified by '$passdb'"
 
@@ -97,21 +97,21 @@ mysql -uroot -e "flush privileges"
 rm -rf /var/www/html/index.html
 
 echo "----------------------------------------------------"
-echo " download cacti versi terbaru "
+echo " Download the latest version of Cacti "
 echo "----------------------------------------------------"
 sleep 2
 
 wget https://www.cacti.net/downloads/cacti-latest.tar.gz --no-check-certificate
 
 echo "----------------------------------------------------"
-echo " Ekstrak Cacti "
+echo " Extract Cacti"
 echo "----------------------------------------------------"
 sleep 2
 
 tar -zxvf cacti-latest.tar.gz
 
 echo "----------------------------------------------------"
-echo " Copy Cacti ke Folder /var/www/html"
+echo " Copy cacti to folder /var/www/html"
 echo "----------------------------------------------------"
 sleep 2
 
@@ -132,7 +132,7 @@ sed -i 's/database_password = '\''cactiuser/database_password = '\'''$passdb'/g'
 sed -i 's/url_path = '\''\/cacti/url_path = '\''/g' /var/www/html/include/config.php
 
 echo "----------------------------------------------------"
-echo " Tambah cacti di cronjob"
+echo " Add cacti in cronjob"
 echo "----------------------------------------------------"
 sleep 2
 touch /etc/cron.d/cacti
@@ -143,7 +143,7 @@ EOF
 chmod +x /etc/cron.d/cacti
 echo "===================================================="
 echo " *** FINISH *** "
-echo " cacti terinstall di folder /var/www/html "
-echo " silahkan lanjutkan login cacti http://"`hostname -I | awk '{print $1}'`
+echo " Cacti is installed in the folder /var/www/html "
+echo " Continue logging in cacti http://"`hostname -I | awk '{print $1}'`
 echo " username: admin password: admin "
 echo "===================================================="
